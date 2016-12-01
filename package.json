@@ -12,13 +12,13 @@
   },
   "author": "duncan nevin",
   "license": "ISC",
-   "dependencies": {
+  "dependencies": {
     "body-parser": "^1.9.2",
     "express": "^4.10.1",
     "morgan": "^1.4.1",
+    "mysql": "^2.4.2",
     "request": "^2.69.0",
-    "sequelize": "^3.21.0",
-    "mongodb": "^2.2.12"
+    "sequelize": "^3.27.0"
   },
   "devDependencies": {
     "babel-cli": "^6.7.5",
