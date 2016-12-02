@@ -3,8 +3,9 @@ var router = require('express').Router();
 
 router.get('/general', postProcessor.general.get);
 router.post('/general', postProcessor.general.post);
-router.get('/custom', postProcessor.custom.get);
-router.put('/custom', postProcessor.custom.put);
-router.delete('/custom', postProcessor.custom.delete);
+router.get('/filterMessagesByUsername', postProcessor.filterMessagesByUsername.get);
+router.get('/filterMessageById', postProcessor.filterMessageById.get);
+router.put('/update', postProcessor.update.put);
+router.delete('/update', postProcessor.update.delete);
 
 module.exports = router;

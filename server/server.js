@@ -2,7 +2,6 @@ var express = require('express');
 var morgan = require('morgan');
 var parser = require('body-parser');
 
-// var db = require('db');
 var router = require('./routes');
 
 // create new app...

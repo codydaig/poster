@@ -21,7 +21,8 @@ sequelize
 var User = sequelize.define('user', {
   userName: {
     type: Sequelize.STRING,
-    field: 'user_name'
+    field: 'user_name',
+    unique: true
   },
   firstName: {
     type: Sequelize.STRING,
