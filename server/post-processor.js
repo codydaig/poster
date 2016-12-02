@@ -4,16 +4,15 @@ var morgan = require('morgan');
 var db = require('./db.js');
 
 module.exports = {
-  // handles adding new posts, and getting the whole collection...
-  general: { // get all posts
-    get: function(req, res) {
+  general: {
+    get: function(req, res) { // get all posts
       db.Post.findAll({include: [db.User]})
         .then(function(post) {
           res.json(post)
           res.end();
         });
     },
-    post: function(req, res) { // create a new post
+    post: function(req, res) { // add a new post and if needed a username
       db.User.findOrCreate({where: {userName: req.body.userName, firstName: req.body.firstName, lastName: req.body.lastName}})
         .spread(function(user, created) {
           db.Post.create({
@@ -27,9 +26,8 @@ module.exports = {
         });
     },
   },
-  // gets all posts based affiliated with specific user.
   filterMessagesByUsername: {
-    get: function(req, res) { // retreive all posts based on username.
+    get: function(req, res) { // filters posts based on username
       db.User.findAll({where: {userName: req.query.userName}})
         .spread(function(user, created) {
           db.Post.findAll({
@@ -44,9 +42,8 @@ module.exports = {
         })
     }
   },
-  // gets a single post based on username.
   filterMessageById: {
-    get: function(req, res) { // retreive a single post by its id
+    get: function(req, res) { // retreives a single post by its id
       db.Post.findAll({where: req.query})
         .then(function(post) {
           res.json(post);
@@ -54,8 +51,7 @@ module.exports = {
         });
     }
   },
-  // handles updates to existing posts.
-  update: { // update a single post by its id
+  update: { // updates a single post by its id
     put: function(req, res) {
       db.Post.update(
       {
@@ -68,7 +64,7 @@ module.exports = {
       });
       res.end();
     },
-    delete: function(req, res) { // delete a single post by its id
+    delete: function(req, res) { // deletes a single post by its id
       db.Post.destroy({
         where: {
           id: req.body.id
