@@ -8,7 +8,11 @@ module.exports = {
     get: function(req, res) { // get all posts
       db.Post.findAll({include: [db.User]})
         .then(function(post) {
-          res.json(post)
+          if (post.length) {
+            res.json(post)
+          } else {
+            res.write('database is empty right now. :(');
+          }
           res.end();
         });
     },
@@ -36,7 +40,11 @@ module.exports = {
             }
           })
           .then(function(post) {
-            res.json(post);
+            if (post.length) {
+              res.json(post);
+            } else {
+              res.write('sorry no messages from that person. :(');
+            }
             res.end();
           });
         })
@@ -46,33 +54,51 @@ module.exports = {
     get: function(req, res) { // retreives a single post by its id
       db.Post.findAll({where: req.query})
         .then(function(post) {
-          res.json(post);
+          if (post.length) {
+            res.json(post);
+          } else {
+            res.write('that id is lonely right now, or does not exist. :(');
+          }
           res.end();
         });
     }
   },
   update: { // updates a single post by its id
     put: function(req, res) {
-      db.Post.update(
-      {
-        userPost: req.body.userPost
-      },
-      {
-        where: {
-          id: req.body.id
-        }
-      });
-      res.status(204);
-      res.end();
+      db.Post.findAll({where: {id: req.body.id}})
+        .then(function(post) {
+          if (post) {
+            db.Post.update(
+            {
+              userPost: req.body.userPost
+            },
+            {
+              where: {
+                id: req.body.id
+              }
+            });
+            res.status(204);
+          } else {
+            res.status(404);
+          }
+          res.end();
+        });
     },
     delete: function(req, res) { // deletes a single post by its id
-      db.Post.destroy({
-        where: {
-          id: req.body.id
-        }
-      });
-      res.status(204);
-      res.end();
+      db.Post.findAll({where: {id: req.body.id}})
+        .then(function(post) {
+          if (post) {
+            db.Post.destroy({
+              where: {
+                id: req.body.id
+              }
+            });
+            res.status(204);
+          } else {
+            res.status(404);
+          }
+          res.end();
+        });
     }
   }
 }
