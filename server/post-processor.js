@@ -62,6 +62,7 @@ module.exports = {
           id: req.body.id
         }
       });
+      res.status(204);
       res.end();
     },
     delete: function(req, res) { // deletes a single post by its id
@@ -70,6 +71,7 @@ module.exports = {
           id: req.body.id
         }
       });
+      res.status(204);
       res.end();
     }
   }
