@@ -7,11 +7,11 @@ Simple API that allows a user to post and get messages. API uses mySQL for a dat
 1. General/POST - adds user (if needed), and message
   * Accepts an object -
   * {
-    userName: "SomeCoolAssName",
-    firstName: "Dude",
-    lastName: "Cool",
-    userPost: "123 Tie my shoe."
-  *}
+  *  userName: "SomeCoolAssName",
+  *  firstName: "Dude",
+  *  lastName: "Cool",
+  *  userPost: "123 Tie my shoe."
+  * }
 
 2. General/GET - gets all messages
   * Sends back an array of JSON data.
@@ -25,12 +25,12 @@ Simple API that allows a user to post and get messages. API uses mySQL for a dat
 5. Update/PUT - updates a message based on its id
   * Accepts an object -
   * {
-  * id: '1',
-  * userPost: 'this replaces the original'
+  *  id: '1',
+  *  userPost: 'this replaces the original'
   * }
 
 6. Update/DELETE - deletes and entire message based on its id.
   * Accepts and object -
   * {
-  * id: '1',
+  *  id: '1',
   * }
